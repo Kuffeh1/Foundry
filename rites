@@ -1,0 +1,13 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+let target = canvas.tokens.get(args[0].hitTargets[0]?._id); 
+
+let effect = tactor.effects.find(i=> i.data.label === "Crimson Rite - Dawn");
+if(!effect){ // not there
+        }
+       else {
+if (target?.actor.data.data.details.type.value.toLowerCase() === "undead")
+let damageRoll = new Roll(args[0].isCritical ? "1d6 + 6" : "1d6").roll(); 
+new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "radiant", target ? [target] : [], damageRoll, {flavor: "Radiant damage against undead", itemCardId: args[0].itemCardId}) }
