@@ -1,14 +1,12 @@
-const lastArg = args[args.length - 1];
-let tactor;
-if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
-else tactor = game.actors.get(lastArg.actorId);
+let itemD = args[0].item;
+let actorD = game.actors.get(args[0].actor._id);
+let tokenD = canvas.tokens.get(args[0].tokenId);
 
-
-new Dialog({
-  title: 'Arcane Ward Refresh',
+let d = new Dialog({
+  title: 'Arcane Ward  Refresh',
   content: `
     <form class="flexcol">
-     <div class="form-group">
+        <div class="form-group">
         <label for="slevel">Spell Level</label>
         <select name="slevel">
           <option value="1">Level One</option>
@@ -16,7 +14,7 @@ new Dialog({
           <option value="3">Level Three</option>
         </select>
       </div>
-    </form>
+      </form>
   `,
   buttons: {
     no: {
@@ -27,14 +25,14 @@ new Dialog({
       icon: '<i class="fas fa-check"></i>',
       label: 'Yes',
       callback: async (html) => {
-        let select = html.find('[name="slevel"]').val();
+        let level = html.find('#slevel').val();
         let effect = token.actor.effects.find(i=> i.data.label === "Arcane Ward");
         if(!effect){ // not there
         }
         else {
-            let Ward = level*2;
-            let HP = target.actor.data.data.attributes.hp.value;
-            await target.actor.update({"data.attributes.hp.value" : HP + Ward });
+        let Ward = level*2;
+        let HP = target.actor.data.data.attributes.hp.value;
+        await target.actor.update({"data.attributes.hp.value" : HP + Ward });
         }
         console.log(select);
       }
