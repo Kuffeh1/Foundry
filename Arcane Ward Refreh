@@ -35,6 +35,7 @@ let d = new Dialog({
         let Ward = level*2;
         let HP = tactor.data.data.attributes.hp.value;
         await tactor.update({"data.attributes.hp.value" : HP + Ward });
+        ChatMessage.create({content: `<em><u>${tactor.name}'s</u> protective shield regains:<br><br> <b>${Ward} Hit points!</b><br><br></em>`});
         }
         console.log(select);
       }
@@ -45,3 +46,5 @@ let d = new Dialog({
     console.log('Example Dialog Closed');
   }
 }).render(true)
+
+ 
