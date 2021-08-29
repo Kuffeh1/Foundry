@@ -1,0 +1,14 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+const target = canvas.tokens.get(lastArg.tokenId)
+
+       let effect = tactor.effects.find(i=> i.data.label === "Arcane Ward");
+        if(!effect){ // not there
+        }
+        else {
+
+        ChatMessage.create({content: `<em><b>Reminder</b> - ${tactor.name}'s Arcane Ward Refreshes!</em>`});
+        }
+     
