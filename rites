@@ -28,5 +28,5 @@ if(!effect1){ // not there
         new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "fire", target ? [target] : [], damageRoll, {flavor: "Fire", itemCardId: args[0].itemCardId})
      
      }   
-     
+      
    }
