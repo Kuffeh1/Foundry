@@ -14,9 +14,9 @@ let dawn = tactor.effects.find(i=> i.data.label === "Crimson Rite - Dawn");
 
 if(!dawn){ // not there
 }
- else if (target == undead) { 
+ else if (target == undead); { 
            new MidiQOL.DamageOnlyWorkflow(actor, token, undeadRoll.total, "radiant", target ? [target] : [], undeadRoll, {flavor: "Radiant damage against undead", itemCardId: args[0].itemCardId});}
-  else (target !== undead) {
+  else (target !== undead); {
         new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "radiant", target ? [target] : [], damageRoll, {flavor: "Radiant", itemCardId: args[0].itemCardId});}
-     } }
+     } 
   
