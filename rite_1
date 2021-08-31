@@ -1,22 +1,34 @@
-if (args[0].hitTargets[0] !== undefined) 
-{
+if (args[0].hitTargets[0] === undefined) return;
+
 const lastArg = args[args.length - 1];
 let tactor;
-if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
-else tactor = game.actors.get(lasatArg.actorId);
-let target = canvas.tokens.get(args[0].hitTargets[0]?._id); 
-
-let undead = ["undead"].some(type => (target?.actor.data.data.details.type?.value || "").toLowerCase().includes(type));
-let damageRoll = new Roll(args[0].isCritical ? "1d6 + 6" : "1d6").roll(); 
-let undeadRoll = new Roll(args[0].isCritical ? "2d6 + 12" : "2d6").roll(); 
-
-let dawn = tactor.effects.find(i=> i.data.label === "Crimson Rite - Dawn");
-
-if(!dawn){ // not there
+if (lastArg.tokenId) {
+    tactor = canvas.tokens.get(lastArg.tokenId).actor;
 }
- else if (target == undead); { 
-           new MidiQOL.DamageOnlyWorkflow(actor, token, undeadRoll.total, "radiant", target ? [target] : [], undeadRoll, {flavor: "Radiant damage against undead", itemCardId: args[0].itemCardId});}
-  else (target !== undead); {
-        new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "radiant", target ? [target] : [], damageRoll, {flavor: "Radiant", itemCardId: args[0].itemCardId});}
-     } 
-  
+else {
+    tactor = game.actors.get(lasatArg.actorId);
+}
+const target = canvas.tokens.get(args[0].hitTargets[0]?._id); 
+const undead = ["undead"].some(type => (target?.actor.data.data.details.type?.value || "").toLowerCase().includes(type));
+const damageRoll = new Roll(args[0].isCritical ? "1d6 + 6" : "1d6").roll(); 
+const undeadRoll = new Roll(args[0].isCritical ? "2d6 + 12" : "2d6").roll(); 
+
+const dawn = tactor.effects.find(i=> i.data.label === "Crimson Rite - Dawn");
+const flame = tactor.effects.find(i=> i.data.label === "Crimson Rite - Flame");
+
+if(dawn)
+{
+    if (undead) { 
+        new MidiQOL.DamageOnlyWorkflow(actor, token, undeadRoll.total, "radiant", target ? [target] : [], undeadRoll, 
+    {flavor: "Radiant damage against undead", itemCardId: args[0].itemCardId});
+    }
+    else {
+    new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "radiant", target ? [target] : [], damageRoll, 
+        {flavor: "Radiant", itemCardId: args[0].itemCardId});
+    }
+}
+
+if (flame)
+{
+new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "fire", target ? [target] : [], damageRoll, {flavor: "Fire", itemCardId: args[0].itemCardId});
+}
