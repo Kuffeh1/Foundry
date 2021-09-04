@@ -1,0 +1,54 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+const target = canvas.tokens.get(lastArg.tokenId)
+
+let d = new Dialog({
+  title: 'Arcane Ward  Refresh',
+  content: `
+    <form class="flexcol">
+        <div class="form-group">
+        <label for="slevel">Spell Level</label>
+        <select id="slevel">
+          <option value="1">Level One</option>
+          <option value="2">Level Two</option>
+          <option value="3">Level Three</option>
+          <option value="4">Level Four</option>
+          <option value="5">Level Five</option>
+          <option value="6">Level Six</option>
+          <option value="7">Level Seven</option>
+          <option value="8">Level Eight</option>
+          <option value="9">Level Nine</option> 
+        </select>
+      </div>
+      </form>
+  `,
+  buttons: {
+    no: {
+      icon: '<i class="fas fa-times"></i>',
+      label: 'Cancel'
+    },
+    yes: {
+      icon: '<i class="fas fa-check"></i>',
+      label: 'Yes',
+      callback: async (html) => {
+        let level = html.find('#slevel').val();
+        let effect = tactor.effects.find(i=> i.data.label === "Arcane Ward");
+        if(!effect){ // not there
+        }
+        else {
+        let Ward = level*2;
+        let HP = tactor.data.data.attributes.hp.value;
+        await tactor.update({"data.attributes.hp.value" : HP + Ward });
+        ChatMessage.create({content: `<em><u>${tactor.name}'s</u> protective shield regains:<br><br> <b>${Ward} Hit points!</b><br><br></em>`});
+        }
+        console.log(select);
+      }
+    },
+  },
+  default: 'yes',
+  close: () => {
+    console.log('Example Dialog Closed');
+  }
+}).render(true)
