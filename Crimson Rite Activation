@@ -1,0 +1,87 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+const target = canvas.tokens.get(lastArg.tokenId)
+
+const level = tactor.data.type === "npc" ? tactor.data.data.details.cr : tactor.classes["blood-hunter"].data.data.levels;
+let hemoDie = (4 + (2 * (Math.floor((level + 1) / 6))));
+let damageRoll = new Roll(`1d${hemoDie}`).roll();
+let HP = tactor.data.data.attributes.hp.value;
+
+new Dialog({
+  title: "Select your Crimson Rite",
+  buttons:{
+    one: {
+        label: "Rite of the Dawn",
+        callback: () => dawn()
+    },
+    two: {
+      label: "Rite of the Flame",
+      callback: () => flame()
+  }
+  }
+}).render(true);
+
+function dawn () {let Rdawn = async function() {
+  let the_message = "";
+  {
+    const effectData = {
+      label : "Crimson Rite - Dawn",
+      icon : "icons/magic/holy/projectiles-blades-salvo-yellow.webp",
+      changes: [{
+        "key": "data.traits.dr.value",        
+        "value": "necrotic",
+        "mode": 0 ,
+        "priority": 20
+       },{
+        "key": "ATL.brightLight",        
+        "value": "20",
+        "mode": 20 ,
+        "priority": 19
+       }],
+        disabled: false,
+        flags: {
+            dae: {
+                macroRepeat: "none",
+                specialDuration: ["shortRest"]
+            }
+        },
+      }
+      await tactor.createEmbeddedEntity("ActiveEffect", effectData);
+    }
+   await ChatMessage.create({content: `${tactor.name} has activated the:<br><br><b>Crimson Rite of the Dawn</b>`});
+      await damageRoll.toMessage();
+      await tactor.update({"data.attributes.hp.value" : HP - damageRoll.total });
+};
+Rdawn();
+}
+
+function flame () {let Rflame = async function() {
+  let the_message = "";
+  {
+    const effectData = {
+      label : "Crimson Rite - Flame",
+      icon : "icons/magic/fire/projectile-wave-arrow.webp",
+      changes: [{
+        "key": "",        
+        "value": "",
+        "mode": 0 ,
+        "priority": 20
+       }],
+        disabled: false,
+        flags: {
+            dae: {
+                macroRepeat: "none",
+                specialDuration: ["shortRest"]
+            }
+        },
+      }
+      await tactor.createEmbeddedEntity("ActiveEffect", effectData);
+    }
+   await ChatMessage.create({content: `${tactor.name} has activated the:<br><br><b>Crimson Rite of the Flame</b>`});
+      await damageRoll.toMessage();
+      await tactor.update({"data.attributes.hp.value" : HP - damageRoll.total });
+};
+Rflame();
+}
