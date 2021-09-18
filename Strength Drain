@@ -1,0 +1,50 @@
+// Runs only if a hit is detected
+
+if (args[0].hitTargets[0] !== undefined) {
+
+// Get Actors
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+let target  = Array.from(game.user.targets)[0].actor;
+
+// Roll the die
+let roll = new Roll('1d4').roll();
+let rollvalue = roll.total
+let stat = target.data.data.abilities.str.value-rollvalue;
+game.dice3d?.showForRoll(roll);
+
+//write effect
+let drain = async function() {
+  let the_message = "";
+  {
+    const effectData = {
+      label : "Drain",
+      icon : "icons/magic/unholy/orb-hands-pink.webp",
+      changes: [{
+        "key": "data.abilities.str.value",        
+        "value": `-${rollvalue}`,
+        "mode": 2,
+        "priority": 20
+       }],
+        disabled: false,
+        flags: {
+            dae: {
+                macroRepeat: "none",
+                specialDuration: ["shortRest"]
+            }
+        },
+      }
+    await target.createEmbeddedEntity("ActiveEffect", effectData);
+ the_message = `<em>${tactor.name} saps ${target.name} of ${rollvalue} pts from their Strength Score! <br><br>${target.name} now has a Strength Score of ${stat}. <br><br><b>If it reaches O, they die!!</b></em>`;
+  }
+  ChatMessage.create({
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({tactor: tactor}),
+      content: the_message,
+      type: CONST.CHAT_MESSAGE
+    });
+};
+drain();
+}
