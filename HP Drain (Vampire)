@@ -1,0 +1,38 @@
+async function wait(ms) {return new Promise(resolve => {setTimeout(resolve, ms);});}
+if(args[0].hitTargets.length === 0) return {};
+let tokenD = canvas.tokens.get(args[0].tokenId);
+let actorD = game.actors.get(args[0].actor._id);
+let target  = canvas.tokens.get(args[0].hitTargets[0].id);
+let itemD = args[0].item;
+let gameRound = game.combat ? game.combat.round : 0;
+
+const diceMult = args[0].isCritical ? 2: 1;
+const numDice = 3 * diceMult;
+args[0].isCritical ? numDice * 2 : numDice;
+let damageRoll = new Roll(`${numDice}d6`).roll();
+new MidiQOL.DamageOnlyWorkflow(actorD, tokenD, damageRoll.total, "necrotic", [target], damageRoll, {flavor: "Necrotic Bite - Damage Roll (Necrotic)", damageList: args[0].damageList, itemCardId: args[0].itemCardId });
+await MidiQOL.applyTokenDamage([{damage: damageRoll.total, type: "healing"}], damageRoll.total, new Set([tokenD]), itemD.name, new Set());
+const effectData = {
+ label : "Drain",
+ icon : "icons/skills/wounds/blood-drip-droplet-red.webp",
+ origin: args[0].uuid,
+ changes: [{
+   "key": "data.attributes.hp.max",        
+   "value": `-${damageRoll.total}`,
+   "mode": 2,
+  "priority": 20
+   }],
+  disabled: false,
+  duration: {seconds: 86400,startRound: gameRound, startTime: game.time.worldTime},
+}
+await MidiQOL.socket().executeAsGM("createEffects", {actorUuid: target.actor.uuid, effects: [effectData]});
+let hpNow = target.actor.data.data.attributes.hp.max;
+let updateHP = hpNow - damageRoll.total;
+let the_message = `<p>${tokenD.name} drains ${target.name} of ${damageRoll.total} pts from their maximum Hit Point value!</p><p>${target.name} now has Maximum Hit Point maximum of ${updateHP}.</p><br><p><b>If it reaches O, they die!!</b></p><br><p> ${tokenD.name} regains ${damageRoll.total} Hit Points back!</p>`;
+await wait(600);
+ChatMessage.create({
+      user: game.user._id,
+      speaker: ChatMessage.getSpeaker({actorD: actorD}),
+      content: the_message,
+      type: CONST.CHAT_MESSAGE
+    });
