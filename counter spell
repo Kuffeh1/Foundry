@@ -1,0 +1,14 @@
+const lastArg = args[args.length - 1];
+let tactor;
+const target = canvas.tokens.get(lastArg.tokenId)
+if (lastArg.tokenId) tactor = target.actor;
+else tactor = game.actors.get(lastArg.actorId);
+
+let level = args[0].spellLevel;
+let counter = tactor.data.data.attr.spellcasting;
+let countermod = tactor.data.data.abilities[counter].mod;
+let counterRoll = new Roll(`1d20 + ${countermod}`).roll();
+let hlevel = 1 + level;
+
+ChatMessage.create({content:`<b>${tactor.name} attempts to counter the spell just cast!</b><br><br>They have used counterspell at <b>Level ${level}</b>.<br><br>* Any spell cast of <b>Level ${level}</b> or lower is automatically counterspelled.<br><br>* Any spell of <b>Level ${hlevel}</b> or higher ${tactor.name} has rolled the following to attempt to counter it - <br><br>`});
+await counterRoll.toMessage();
