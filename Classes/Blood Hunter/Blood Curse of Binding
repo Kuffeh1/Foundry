@@ -32,7 +32,7 @@ function activate () {let apply = async function() {
       icon: "icons/tools/fasteners/chain-steel-blue.webp",
       changes: [{
         "key": "data.attributes.movement.walk",        
-        "value": "0",
+        "value": "0", 
         "mode": 5 ,
         "priority": 20
        },
