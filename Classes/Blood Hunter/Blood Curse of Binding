@@ -10,6 +10,16 @@ let damageRoll = new Roll(`1d${hemoDie}`).roll();
 let HP = tactor.data.data.attributes.hp.value;
 let gameRound = game.combat ? game.combat.round : 0;
 
+const DC = (8 + tactor.data.data.attributes.prof + tactor.data.data.abilities.int.mod);
+const flavor = `${CONFIG.DND5E.abilities["con"]} DC${DC} ${"Blood Curse of Binding"}`;
+let save = (await target.rollAbilitySave("str", {flavor, fastForward: false})).total; 
+
+if (save >= DC) {
+  await ChatMessage.create({content: `${target.name} exerts control and shakes off the binding attempt`});
+return; }
+
+if (save < DC){
+
 new Dialog({
   title: "Do you wish to amplify your curse?",
   buttons:{
@@ -32,7 +42,7 @@ function activate () {let apply = async function() {
       icon: "icons/tools/fasteners/chain-steel-blue.webp",
       changes: [{
         "key": "data.attributes.movement.walk",        
-        "value": "0",  
+        "value": "0",
         "mode": 5 ,
         "priority": 20
        },
@@ -56,7 +66,7 @@ function activate () {let apply = async function() {
        },
        {
         "key": "flags.midi-qol.OverTime",        
-        "value": "turn=end, saveAbility=str, saveDC=15, label=Blood Curse of Binding ",
+        "value": `turn=end, saveAbility=str, saveDC=${DC}, label=Blood Curse of Binding `,
         "mode": 0 ,
         "priority": 19
        }],
@@ -93,3 +103,4 @@ function noactivate (){let noapply = async function() {
 };
 noapply();
 }
+  }
