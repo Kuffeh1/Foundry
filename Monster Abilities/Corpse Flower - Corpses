@@ -1,0 +1,14 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+let target  = Array.from(game.user.targets)[0].actor;
+
+let roll = new Roll('1d6+3').roll();
+let rollvalue = roll.total
+roll.toMessage({
+                flavor:"Number of Corpses",
+});
+
+await tactor.update({"data.resources.legact.max" : rollvalue});
+await tactor.update({"data.resources.legact.value" : rollvalue});
