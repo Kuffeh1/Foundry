@@ -1,0 +1,60 @@
+main()
+
+async function main() {
+
+    let selected = canvas.tokens.controlled;
+    let target = Array.from(game.user.targets);
+    
+    let currentActor = selected[0].actor;
+    let currentTarget; // We create the variable, but we do not set it yet.
+    let targetList = args[0].targets;
+    
+    let saved = [];
+    let failed = [];
+    let DC = (8 + currentActor.data.data.attributes.prof + currentActor.data.data.abilities.cha.mod);
+    let gameRound = game.combat ? game.combat.round : 0;
+    
+    for(let target of targetList){
+    currentTarget = target.actor; // We set the current target here, inside the loop. I used console.log to find out targets fetches tokens, and we need actors, so we define that underneath.
+    console.log(currentTarget);
+    
+    let faithless = ["fey", "fiend"].some(type => (currentTarget?.data.data.details.type?.value || "").toLowerCase().includes(type));
+    
+    if (faithless) {
+    
+    const flavor = `<p>${"Channel Divinity - Turn the Faithless"}</p><p>${CONFIG.DND5E.abilities["wis"]} DC${DC}</P> `;
+    let save = (await currentTarget.rollAbilitySave("wis", {flavor, fastForward: false})).total; 
+    
+    if (save >= DC) {
+        
+        await ChatMessage.create({content: `${currentTarget.name} resists your force of will and remains steadfast!`});
+        saved.push(target);
+      return; }
+      
+      if (save < DC){
+        
+                    const effectData = {
+              label: "Turned",
+              icon: "systems/dnd5e/icons/skills/water_03.jpg",
+              changes: [{
+                "key": "",        
+                "value": "",
+                "mode": 0 ,
+                "priority": 20
+               },],
+               disabled: false,
+               duration: {rounds: 10, startRound: gameRound, startTime: game.time.worldTime },
+                    flags: {
+                   dae: {
+                       specialDuration: ["isDamaged"]
+                   }
+               },
+                    }
+              await currentTarget.createEmbeddedEntity("ActiveEffect", effectData);
+              await ChatMessage.create({content: `${currentTarget.name} is now Turned for 1 minute or until damaged!`});
+              failed.push(target);
+        }
+         }
+    }
+    }
+  
