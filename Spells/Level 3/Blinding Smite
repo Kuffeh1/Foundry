@@ -1,0 +1,44 @@
+// Modules Required - Item Macro, MIDQOL, Dynamic Active Effects
+// Card settings - Target & range: Self
+// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Override / ItemMacro.Blinding Smite 
+
+// Notes - If you use convient effects; on line 26 - replace "macro.CUB" with "macro.CE"
+
+if (!["mwak","rwak"].includes(args[0].item.data.actionType)) return {}; 
+if (args[0].hitTargetUuids.length === 0) return {}; // did not hit anyone
+
+let selected = await MidiQOL.MQfromActorUuid(args[0].actorUuid); 
+let DC = selected.data.data.attributes.spelldc;
+
+for (let tokenUuid of args[0].hitTargetUuids) {
+    const target = await fromUuid(tokenUuid);
+    const targetActor = target.actor;
+  
+    const flavor = `<p>${"Consititution Saving Throw"}</p><p>${CONFIG.DND5E.abilities["con"]} DC ${DC} </P> `;
+    let conSave = (await targetActor.rollAbilitySave("con", { flavor, fastForward: false})).total; 
+ 
+    if (conSave < DC) {
+      const effectData = {
+        label: "Blinding Smite", 
+        icon: "icons/weapons/swords/sword-winged-pink.webp",
+        changes: [
+          {key: "flags.midi-qol.OverTime", mode: 0, value: `"turn=end,saveAbility=con,saveDC=${DC},label=Blinding Smite" `, priority: 20}, 
+          {key: "macro.CUB", mode: 0, value: "Blinded", priority: 20} // macro to apply the damage
+                ],
+  
+        origin: "Blinding Smite", 
+        disabled: false,
+        icon: "icons/weapons/swords/sword-winged-pink.webp",
+        label: "Blinding Smite"
+      }
+      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+} 
+}
+Hooks.once("midi-qol.RollComplete", (workflow) => {
+    console.log("Deleting concentration")
+    const effect = MidiQOL.getConcentrationEffect(actor);
+    if (effect) effect.delete();
+    return true;
+})
+
+return{damageRoll: `3d8[radiant]`, flavor: "Blinding Smite"}
