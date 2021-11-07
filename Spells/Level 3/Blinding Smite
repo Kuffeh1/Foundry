@@ -1,6 +1,6 @@
 // Modules Required - Item Macro, MIDQOL, Dynamic Active Effects
 // Card settings - Target & range: Self
-// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Override / ItemMacro.Blinding Smite 
+// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Custom / ItemMacro.Blinding Smite 
 
 // Notes - If you use convient effects; on line 26 - replace "macro.CUB" with "macro.CE"
 
