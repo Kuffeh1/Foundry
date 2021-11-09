@@ -1,0 +1,99 @@
+let select = canvas.tokens.controlled;
+if(select.length > 1){
+  ui.notifications.error("Please select only one token")
+  return;
+}
+let selected = select[0].actor;
+// Get Target
+let targets = Array.from(game.user.targets)
+if(targets.length == 0 || targets.length > 1 ){
+  ui.notifications.error("Please target one token");
+  return;
+}
+let target = targets[0].actor;
+
+let DC = selected.data.data.attributes.spelldc;
+let gameRound = game.combat ? game.combat.round : 0;
+
+new Dialog({
+    title: "Pick which saving throw to use",
+    buttons:{
+      one: {
+          label: "Strength Save",
+          callback: () => Strength()
+      },
+      two: {
+        label: "Dexterity Save",
+        callback: () => Dexterity()
+    }
+    }
+  }).render(true);
+
+  
+  function Strength (){let Str = async function() {
+    const flavor = `<p>${"Strength Saving Throw"}</p><p>${CONFIG.DND5E.abilities["str"]} DC${DC}</P> `;
+    let strSave= (await target.rollAbilitySave("str", { flavor, fastForward: false})).total; 
+
+    if (strSave >= DC) {
+        
+      await ChatMessage.create({content: `${target.name} breaks free from the vines!`});
+      return; }
+    
+
+    if (strSave < DC){
+      const effectData = {
+        label : "Natures Wrath",
+        icon : "icons/magic/nature/root-vine-entangled-hand.webp",
+        changes: [{
+          "key": "macro.CUB",        
+          "value": "Restrained",
+          "mode": 0 ,
+          "priority": 20
+        },
+          { "key": "flags.midi-qol.OverTime",        
+            "value": `turn=end, saveAbility=str, saveDC=${DC}, label=Natures Wrath`,
+            "mode": 0 ,
+            "priority": 19
+         }],
+          disabled: false,
+        }
+        await target.createEmbeddedEntity("ActiveEffect", effectData);
+      }  
+
+  };
+  Str();
+  }
+
+  function Dexterity (){let Dex = async function() {
+    const flavor = `<p>${"Dexterity Saving Throw"}</p><p>${CONFIG.DND5E.abilities["dex"]} DC${DC}</P> `;
+    let dexSave= (await target.rollAbilitySave("dex", { flavor, fastForward: false})).total; 
+
+    if (dexSave >= DC) {
+        
+      await ChatMessage.create({content: `${target.name} breaks free from the vines!`});
+      return; }
+    
+
+    if (dexSave < DC){
+      const effectData = {
+        label : "Natures Wrath",
+        icon : "icons/magic/nature/root-vine-entangled-hand.webp",
+        changes: [{
+          "key": "macro.CUB",        
+          "value": "Restrained",
+          "mode": 0 ,
+          "priority": 20
+        },
+          { "key": "flags.midi-qol.OverTime",        
+            "value": `turn=end, saveAbility=dex, saveDC=${DC}, label=Natures Wrath`,
+            "mode": 0 ,
+            "priority": 19
+         }],
+          disabled: false,
+        }
+        await target.createEmbeddedEntity("ActiveEffect", effectData);
+      }  
+
+  };
+  Dex();
+  }
