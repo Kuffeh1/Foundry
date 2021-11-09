@@ -1,0 +1,39 @@
+// Modules Required - Item Macro, MIDQOL, Dynamic Active Effects
+// Card settings - Target & range: Self
+// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Custom / ItemMacro.Searing Smite [2] flags.midi-qol.brandingSmite.level / Override / @item.level
+
+
+if (!["mwak","rwak"].includes(args[0].item.data.actionType)) return {}; 
+if (args[0].hitTargetUuids.length === 0) return {}; 
+
+let selected = await MidiQOL.MQfromActorUuid(args[0].actorUuid); 
+let DC = selected.data.data.attributes.spelldc;
+
+for (let tokenUuid of args[0].hitTargetUuids) {
+    const target = await fromUuid(tokenUuid);
+    const targetActor = target.actor;
+  
+         const effectData = {
+        label: "Searing Smite", 
+        icon: "icons/skills/melee/strike-sword-steel-yellow.webp",
+        changes: [
+          {key: "flags.midi-qol.OverTime", mode: 0, value: `"turn=start,saveAbility=con,saveDC=${DC},damageRoll=1d6,damageType=fire,label=Searing Smite" `, priority: 20}, 
+                ],
+  
+        origin: "Searing Smite", 
+        disabled: false,
+        icon: "icons/skills/melee/strike-sword-steel-yellow.webp",
+        label: "Searing Smite"
+      }
+      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+      await ChatMessage.create({content: `${target.name} is set on fire and begins to burn!`});
+} 
+Hooks.once("midi-qol.RollComplete", (workflow) => {
+    console.log("Deleting concentration")
+    const effect = MidiQOL.getConcentrationEffect(actor);
+    if (effect) effect.delete();
+    return true;
+})
+
+const spellLevel = actor.data.flags["midi-qol"].brandingSmite.level;
+return{damageRoll: `${spellLevel}d6[fire]`, flavor: "Searing Smite"}
