@@ -1,0 +1,44 @@
+// Modules Required - Item Macro, MIDQOL, Dynamic Active Effects
+// Card settings - Target & range: Self
+// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Custom / ItemMacro.Wrathful Smite 
+
+// Notes - If you use convient effects; on line 26 - replace "macro.CUB" with "macro.CE"
+
+if (!["mwak","rwak"].includes(args[0].item.data.actionType)) return {}; 
+if (args[0].hitTargetUuids.length === 0) return {}; // did not hit anyone
+
+let selected = await MidiQOL.MQfromActorUuid(args[0].actorUuid); 
+let DC = selected.data.data.attributes.spelldc;
+
+for (let tokenUuid of args[0].hitTargetUuids) {
+    const target = await fromUuid(tokenUuid);
+    const targetActor = target.actor;
+  
+    const flavor = `<p>${"Wisdom Saving Throw"}</p><p>${CONFIG.DND5E.abilities["wis"]} DC ${DC} </P> `;
+    let conSave = (await targetActor.rollAbilitySave("wis", { flavor, fastForward: false})).total; 
+ 
+    if (conSave < DC) {
+      const effectData = {
+        label: "Wrathful Smite", 
+        icon: "icons/skills/melee/strike-axe-energy-pink.webp",
+        changes: [
+          {key: "flags.midi-qol.OverTime", mode: 0, value: `turn=end,saveAbility=wis,saveDC=${DC},label=Wrathful Smite`, priority: 20}, 
+          {key: "macro.CUB", mode: 0, value: "Frightened", priority: 20} // macro to apply the damage
+                ],
+  
+        origin: "Wrathful Smite", 
+        disabled: false,
+        icon: "icons/skills/melee/strike-axe-energy-pink.webp",
+        label: "Wrathful Smite"
+      }
+      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+} 
+}
+Hooks.once("midi-qol.RollComplete", (workflow) => {
+    console.log("Deleting concentration")
+    const effect = MidiQOL.getConcentrationEffect(actor);
+    if (effect) effect.delete();
+    return true;
+})
+
+return{damageRoll: `1d6[psychic]`, flavor: "Wrathful Smite"}
