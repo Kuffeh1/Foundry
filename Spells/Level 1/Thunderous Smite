@@ -1,0 +1,36 @@
+// Modules Required - Item Macro, MIDQOL, Dynamic Active Effects
+// Card settings - Target & range: Self
+// DAE settings - [1] flags.dnd5e.DamageBonusMacro / Custom / ItemMacro.Thunderous Smite 
+
+
+if (!["mwak","rwak"].includes(args[0].item.data.actionType)) return {}; 
+if (args[0].hitTargetUuids.length === 0) return {}; 
+
+let selected = await MidiQOL.MQfromActorUuid(args[0].actorUuid); 
+let DC = selected.data.data.attributes.spelldc;
+
+for (let tokenUuid of args[0].hitTargetUuids) {
+    const target = await fromUuid(tokenUuid);
+    const targetActor = target.actor;
+    const flavor = `<p>${"Strength Saving Throw"}</p><p>${CONFIG.DND5E.abilities["str"]} DC ${DC} </P> `;
+    let conSave = (await targetActor.rollAbilitySave("str", { flavor, fastForward: false})).total; 
+ 
+    if (conSave < DC) {  
+         const effectData = {
+        changes: [
+          {key: "macro.CUB", mode: 0, value: "Prone", priority: 20}
+                ],
+      }
+
+      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+      await ChatMessage.create({content: `${target.name} is pushed 10 feet away from ${selected.name} and knocked from their feet!`});
+} 
+}
+Hooks.once("midi-qol.RollComplete", (workflow) => {
+    console.log("Deleting concentration")
+    const effect = MidiQOL.getConcentrationEffect(actor);
+    if (effect) effect.delete();
+    return true;
+})
+
+return{damageRoll: `2d6[thunder]`, flavor: "Thunderous Smite"}
