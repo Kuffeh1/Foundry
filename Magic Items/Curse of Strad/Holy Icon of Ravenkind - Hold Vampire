@@ -1,5 +1,6 @@
 // Modules Required - Item Macro, MIDQOL, Dynamic Active Effects, (Optional - Magic Item)
 // Card settings - Target:  30 - feet - creature/enemy/radius/sphere  (your choice) || Range: blank - blank - Special || Duration: 1 - Minutes
+// Run as either: OnUse - MACRONAME or OnUse - ItemMacro
 
 main()
 
