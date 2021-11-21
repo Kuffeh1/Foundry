@@ -1,0 +1,45 @@
+// Modules Required - Item Macro, MIDQOL, Dynamic Active Effects, (Optional - Magic Item)
+// Card settings - Target:  30 - feet - creature/enemy/radius/sphere  (your choice) || Range: blank - blank - Special || Duration: 1 - Minutes
+
+main()
+
+async function main() {
+
+    let currentTarget; 
+    let targetList = args[0].targets;
+    let gameRound = game.combat ? game.combat.round : 0;
+    
+    let DC = 15;
+      
+    for(let target of targetList){
+    currentTarget = target.actor; 
+    console.log(currentTarget);
+    
+    let vampire = ["vampire"].some(type => (currentTarget?.data.data.details.type?.subtype || "").toLowerCase().includes(type));
+    
+    if (vampire) {
+    
+    const flavor = `<p>${"Turn Vampire"}</p><p>${CONFIG.DND5E.abilities["wis"]} DC${DC}</P> `;
+    let save = (await currentTarget.rollAbilitySave("wis", {flavor, fastForward: false})).total; 
+      
+      if (save < DC){
+        
+                    const effectData = {
+                        changes: [
+                            {key: "macro.CUB", mode: 0, value: "Paralyzed", priority: 20},
+                            {key: "flags.midi-qol.OverTime", mode: 0, value: `turn=end,saveAbility=wis,saveDC=${DC},saveMagic=true,label=Paralyzed `, priority: 20}, 
+                                  ],
+                                  origin: "Hold Vampire", 
+                                  disabled: false,
+                                  icon: "icons/magic/control/silhouette-hold-beam-blue.webp",
+                                  label: "Hold Vampire",
+                                  duration: {rounds: 10, startRound: gameRound, startTime: game.time.worldTime }
+                     
+                                         }
+              await currentTarget.createEmbeddedEntity("ActiveEffect", effectData);
+        }
+         }
+    }
+    }
+
+    
