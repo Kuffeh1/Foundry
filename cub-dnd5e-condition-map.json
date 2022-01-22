@@ -1,0 +1,2050 @@
+{
+  "system": "dnd5e",
+  "map": [
+    {
+      "id": "advantage",
+      "name": "Advantage",
+      "icon": "systems/dnd5e/icons/skills/yellow_01.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Advantage",
+        "icon": "systems/dnd5e/icons/skills/yellow_01.jpg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 5,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "aura": "None",
+            "radius": null
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "arcane-ward",
+      "name": "Arcane Ward",
+      "icon": "https://foundry-wibbly-s3-assets.s3.amazonaws.com/test/kuffeh/icons/magic-palm.png",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Arcane Ward",
+        "icon": "https://foundry-wibbly-s3-assets.s3.amazonaws.com/test/kuffeh/icons/magic-palm.png",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "aura": "None",
+            "radius": null,
+            "alignment": "",
+            "type": "",
+            "hostile": false,
+            "onlyOnce": false
+          },
+          "combat-utility-belt": {
+            "conditionId": "arcane-ward"
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "bane",
+      "name": "Bane",
+      "icon": "systems/dnd5e/icons/skills/shadow_18.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Bane",
+        "icon": "systems/dnd5e/icons/skills/shadow_18.jpg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.bonuses.abilities.save",
+            "mode": 0,
+            "value": "-1d4"
+          },
+          {
+            "key": "data.bonuses.All-Attacks",
+            "mode": 0,
+            "value": "-1d4"
+          }
+        ]
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "bless",
+      "name": "Bless",
+      "icon": "icons/svg/angel.svg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Bless",
+        "icon": "icons/svg/angel.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": 10,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.bonuses.All-Attacks",
+            "mode": 0,
+            "value": "1d4"
+          },
+          {
+            "key": "data.bonuses.abilities.save",
+            "mode": 0,
+            "value": "1d4"
+          }
+        ]
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "blinded",
+      "name": "Blinded",
+      "icon": "modules/combat-utility-belt/icons/blinded.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.ufovEAFs47WJ3FjD]{Blinded}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Blinded",
+        "icon": "modules/combat-utility-belt/icons/blinded.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 5,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          }
+        ]
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"ufovEAFs47WJ3FjD\"><i class=\"fas fa-book-open\"></i> Blinded</a>",
+      "isChanged": false
+    },
+    {
+      "id": "bloodied",
+      "name": "Bloodied",
+      "icon": "modules/combat-utility-belt/icons/wounded.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.GbO2ElpH0D8HqPlt]{Bloodied}",
+      "applyTrigger": "wg5vqyp4nv7nd1jz",
+      "removeTrigger": "vke40spa3wd9bv2x",
+      "activeEffect": {
+        "label": "Bloodied",
+        "icon": "modules/conditions5e/icons/wounded.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "",
+            "mode": 2,
+            "value": ""
+          }
+        ]
+      },
+      "options": {
+        "overlay": true,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"GbO2ElpH0D8HqPlt\"><i class=\"fas fa-book-open\"></i> Bloodied</a>",
+      "isChanged": false
+    },
+    {
+      "id": "bloodlust",
+      "name": "Bloodlust",
+      "icon": "systems/dnd5e/icons/skills/blood_07.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": null,
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "brand-of-castigation",
+      "name": "Brand of Castigation",
+      "icon": "https://foundry-wibbly-s3-assets.s3.amazonaws.com/test/kuffeh/icons/cursed-star.png",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": null,
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "charmed",
+      "name": "Charmed",
+      "icon": "modules/combat-utility-belt/icons/charmed.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.L8JL7eBviIQc0lQM]{Charmed}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"L8JL7eBviIQc0lQM\"><i class=\"fas fa-book-open\"></i> Charmed</a>",
+      "isChanged": false
+    },
+    {
+      "id": "concentrating",
+      "name": "Concentrating",
+      "icon": "modules/combat-utility-belt/icons/concentrating.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.j7QV66LMDhYx6LYa]{Concentrating}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"j7QV66LMDhYx6LYa\"><i class=\"fas fa-book-open\"></i> Concentrating</a>",
+      "isChanged": false
+    },
+    {
+      "id": "deafened",
+      "name": "Deafened",
+      "icon": "modules/combat-utility-belt/icons/deafened.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.tUTqWpTtrhdih9GW]{Deafened}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"tUTqWpTtrhdih9GW\"><i class=\"fas fa-book-open\"></i> Deafened</a>",
+      "isChanged": false
+    },
+    {
+      "id": "dead",
+      "name": "Dead",
+      "icon": "https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/icons/death-skull-red.svg",
+      "referenceId": "",
+      "applyTrigger": "51dk1tz8pdibz342",
+      "removeTrigger": "ugo1mwm3r4c8buy0",
+      "activeEffect": {
+        "label": "Dead",
+        "icon": "icons/svg/skull.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "radius": null,
+            "aura": "None",
+            "alignment": "",
+            "type": "",
+            "ignoreSelf": false,
+            "height": false,
+            "hidden": false,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        },
+        "changes": []
+      },
+      "options": {
+        "overlay": true,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": true
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "death-ward",
+      "name": "Death Ward",
+      "icon": "systems/dnd5e/icons/spells/heal-sky-3.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": null,
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "disadvantage",
+      "name": "Disadvantage",
+      "icon": "systems/dnd5e/icons/skills/violet_05.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Disadvantage",
+        "icon": "systems/dnd5e/icons/skills/violet_05.jpg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "aura": "None",
+            "radius": null
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "dodging",
+      "name": "Dodging",
+      "icon": "systems/dnd5e/icons/skills/armor_01.jpg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.wUH21j5khSDWeSHm]{Dodge}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Dodging",
+        "icon": "systems/dnd5e/icons/skills/armor_01.jpg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.advantage.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"wUH21j5khSDWeSHm\"><i class=\"fas fa-book-open\"></i> Dodge</a>",
+      "isChanged": false
+    },
+    {
+      "id": "exhaustion-1",
+      "name": "Exhaustion 1",
+      "icon": "modules/combat-utility-belt/icons/exhaustion1.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.6jvEDeikO7r786Ny]{Exhaustion}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Exhaustion 1",
+        "icon": "modules/combat-utility-belt/icons/exhaustion1.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.exhaustion",
+            "mode": 5,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 5,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"6jvEDeikO7r786Ny\"><i class=\"fas fa-book-open\"></i> Exhaustion</a>",
+      "isChanged": false
+    },
+    {
+      "id": "exhaustion-2",
+      "name": "Exhaustion 2",
+      "icon": "modules/combat-utility-belt/icons/exhaustion2.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.6jvEDeikO7r786Ny]{Exhaustion}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Exhaustion 2",
+        "icon": "modules/combat-utility-belt/icons/exhaustion2.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.exhaustion",
+            "mode": 5,
+            "value": 2
+          },
+          {
+            "key": "macro.execute",
+            "mode": 0,
+            "value": "CUB-Exhausted"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"6jvEDeikO7r786Ny\"><i class=\"fas fa-book-open\"></i> Exhaustion</a>",
+      "isChanged": false
+    },
+    {
+      "id": "exhaustion-3",
+      "name": "Exhaustion 3",
+      "icon": "modules/combat-utility-belt/icons/exhaustion3.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.6jvEDeikO7r786Ny]{Exhaustion}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Exhaustion 3",
+        "icon": "modules/combat-utility-belt/icons/exhaustion3.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.exhaustion",
+            "mode": 5,
+            "value": 3
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.save.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "macro.execute",
+            "mode": 0,
+            "value": "CUB-Exhausted"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"6jvEDeikO7r786Ny\"><i class=\"fas fa-book-open\"></i> Exhaustion</a>",
+      "isChanged": false
+    },
+    {
+      "id": "exhaustion-4",
+      "name": "Exhaustion 4",
+      "icon": "modules/combat-utility-belt/icons/exhaustion4.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.6jvEDeikO7r786Ny]{Exhaustion}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Exhaustion 4",
+        "icon": "modules/combat-utility-belt/icons/exhaustion4.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.exhaustion",
+            "mode": 5,
+            "value": 4
+          },
+          {
+            "key": "data.attributes.hp.max",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.save.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "macro.execute",
+            "mode": 0,
+            "value": "CUB-Exhausted"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"6jvEDeikO7r786Ny\"><i class=\"fas fa-book-open\"></i> Exhaustion</a>",
+      "isChanged": false
+    },
+    {
+      "id": "exhaustion-5",
+      "name": "Exhaustion 5",
+      "icon": "modules/combat-utility-belt/icons/exhaustion5.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.6jvEDeikO7r786Ny]{Exhaustion}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Exhaustion 5",
+        "icon": "modules/combat-utility-belt/icons/exhaustion5.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.exhaustion",
+            "mode": 5,
+            "value": 5
+          },
+          {
+            "key": "data.attributes.hp.max",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.save.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 1,
+            "value": 0.5
+          },
+          {
+            "key": "macro.execute",
+            "mode": 0,
+            "value": "CUB-Exhausted"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"6jvEDeikO7r786Ny\"><i class=\"fas fa-book-open\"></i> Exhaustion</a>",
+      "isChanged": false
+    },
+    {
+      "id": "frightened",
+      "name": "Frightened",
+      "icon": "modules/combat-utility-belt/icons/frightened.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.qWRZCWUVtLVndUkF]{Frightened}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Frightened",
+        "icon": "modules/combat-utility-belt/icons/frightened.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.skill.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"qWRZCWUVtLVndUkF\"><i class=\"fas fa-book-open\"></i> Frightened</a>",
+      "isChanged": false
+    },
+    {
+      "id": "grappled",
+      "name": "Grappled",
+      "icon": "modules/combat-utility-belt/icons/grappled.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.Ve3KAl36fW5SPpXx]{Grappled}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Grappled",
+        "icon": "modules/combat-utility-belt/icons/grappled.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"Ve3KAl36fW5SPpXx\"><i class=\"fas fa-book-open\"></i> Grappled</a>",
+      "isChanged": false
+    },
+    {
+      "id": "heavily-obscured",
+      "name": "Heavily Obscured",
+      "icon": "https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/icons/dust-cloud.svg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Heavily Obscured",
+        "icon": "https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/icons/dust-cloud.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 5,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 5,
+            "value": "1"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "radius": null,
+            "aura": "None",
+            "alignment": "",
+            "type": "",
+            "ignoreSelf": false,
+            "height": false,
+            "hidden": false,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "incapacitated",
+      "name": "Incapacitated",
+      "icon": "modules/combat-utility-belt/icons/incapacitated.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.uD7ZQW1e93Z2ZrRr]{Incapacitated}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Incapacitated",
+        "icon": "modules/combat-utility-belt/icons/incapacitated.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          }
+        ]
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"uD7ZQW1e93Z2ZrRr\"><i class=\"fas fa-book-open\"></i> Incapacitated</a>",
+      "isChanged": false
+    },
+    {
+      "id": "invisible",
+      "name": "Invisible",
+      "icon": "modules/combat-utility-belt/icons/invisible.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.U9rN44AAGPjnlLMj]{Invisible}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Invisible",
+        "icon": "modules/conditional-visibility/icons/unknown.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.advantage.attack.all",
+            "mode": 2,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.all",
+            "mode": 2,
+            "value": "1"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "radius": null,
+            "aura": "None",
+            "alignment": "",
+            "type": "",
+            "ignoreSelf": false,
+            "height": false,
+            "hidden": false,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"U9rN44AAGPjnlLMj\"><i class=\"fas fa-book-open\"></i> Invisible</a>",
+      "isChanged": false
+    },
+    {
+      "id": "petrified",
+      "name": "Petrified",
+      "icon": "modules/combat-utility-belt/icons/petrified.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.Zfb4O4ckGjs5mzsO]{Petrified}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Petrified",
+        "icon": "modules/combat-utility-belt/icons/petrified.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.fail.ability.save.str",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.DR.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.traits.ci.value",
+            "mode": 2,
+            "value": "poisoned"
+          },
+          {
+            "key": "data.traits.ci.value",
+            "mode": 2,
+            "value": "diseased"
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "macro.CUB",
+            "mode": 0,
+            "value": "Incapacitated"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"Zfb4O4ckGjs5mzsO\"><i class=\"fas fa-book-open\"></i> Petrified</a>",
+      "isChanged": false
+    },
+    {
+      "id": "paralyzed",
+      "name": "Paralyzed",
+      "icon": "modules/combat-utility-belt/icons/paralyzed.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.GZeJzhiXRkOZVrMG]{Paralyzed}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Paralyzed",
+        "icon": "modules/combat-utility-belt/icons/paralyzed.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.fail.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.str",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.critical.mwak",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "macro.CUB",
+            "mode": 0,
+            "value": "Incapacitated"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"GZeJzhiXRkOZVrMG\"><i class=\"fas fa-book-open\"></i> Paralyzed</a>",
+      "isChanged": false
+    },
+    {
+      "id": "poisoned",
+      "name": "Poisoned",
+      "icon": "modules/combat-utility-belt/icons/poisoned.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.miTl6LT8nOhoRxxW]{Poisoned}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Poisoned",
+        "icon": "modules/combat-utility-belt/icons/poisoned.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.check.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.skill.check.all",
+            "mode": 2,
+            "value": 1
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"miTl6LT8nOhoRxxW\"><i class=\"fas fa-book-open\"></i> Poisoned</a>",
+      "isChanged": false
+    },
+    {
+      "id": "prone",
+      "name": "Prone",
+      "icon": "modules/combat-utility-belt/icons/prone.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.ZW3Jw0tr6p3PU2yx]{Prone}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Prone",
+        "icon": "modules/combat-utility-belt/icons/prone.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.attack.all",
+            "mode": 2,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.mwak",
+            "mode": 2,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.msak",
+            "mode": 2,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.rwak",
+            "mode": 2,
+            "value": "1"
+          },
+          {
+            "key": "flags.midi-qol.grants.disadvantage.attack.rsak",
+            "mode": 2,
+            "value": "1"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "radius": null,
+            "aura": "None",
+            "alignment": "",
+            "type": "",
+            "ignoreSelf": false,
+            "height": false,
+            "hidden": false,
+            "hostile": false,
+            "onlyOnce": false
+          },
+          "combat-utility-belt": {
+            "conditionId": "prone"
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"ZW3Jw0tr6p3PU2yx\"><i class=\"fas fa-book-open\"></i> Prone</a>",
+      "isChanged": false
+    },
+    {
+      "id": "reckless",
+      "name": "Reckless",
+      "icon": "systems/dnd5e/icons/skills/weapon_17.jpg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.33efYeefYsUcvc0f]{Reckless}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": null,
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"33efYeefYsUcvc0f\"><i class=\"fas fa-book-open\"></i> Reckless</a>",
+      "isChanged": false
+    },
+    {
+      "id": "restrained",
+      "name": "Restrained",
+      "icon": "modules/combat-utility-belt/icons/restrained.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.POMfLfeqtWj2ADZw]{Restrained}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Restrained",
+        "icon": "modules/combat-utility-belt/icons/restrained.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.disadvantage.skill.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.disadvantage.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"POMfLfeqtWj2ADZw\"><i class=\"fas fa-book-open\"></i> Restrained</a>",
+      "isChanged": false
+    },
+    {
+      "id": "sentinel",
+      "name": "Sentinel",
+      "icon": "icons/skills/melee/strike-sword-slashing-red.webp",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Sentinel",
+        "icon": "icons/skills/melee/strike-sword-slashing-red.webp",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.movement.all",
+            "mode": 5,
+            "value": "0"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "radius": null,
+            "aura": "None",
+            "alignment": "",
+            "type": "",
+            "ignoreSelf": false,
+            "height": false,
+            "hidden": false,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": false,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "shield-of-faith",
+      "name": "Shield of Faith",
+      "icon": "systems/dnd5e/icons/spells/protect-sky-1.jpg",
+      "referenceId": "",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Shield of Faith",
+        "icon": "systems/dnd5e/icons/spells/protect-sky-1.jpg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "data.attributes.ac.value",
+            "mode": 2,
+            "value": 2
+          }
+        ]
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "",
+      "isChanged": false
+    },
+    {
+      "id": "stunned",
+      "name": "Stunned",
+      "icon": "modules/combat-utility-belt/icons/stunned.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.fV9SE0Mq2562FDLG]{Stunned}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": {
+        "label": "Stunned",
+        "icon": "modules/combat-utility-belt/icons/stunned.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.str",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "macro.CUB",
+            "mode": 5,
+            "value": "Incapacitated"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          }
+        }
+      },
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"fV9SE0Mq2562FDLG\"><i class=\"fas fa-book-open\"></i> Stunned</a>",
+      "isChanged": false
+    },
+    {
+      "id": "turned",
+      "name": "Turned",
+      "icon": "systems/dnd5e/icons/skills/water_03.jpg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.exH6XPV2QcLbbw8A]{Turned}",
+      "applyTrigger": "",
+      "removeTrigger": "",
+      "activeEffect": null,
+      "options": {
+        "overlay": false,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"exH6XPV2QcLbbw8A\"><i class=\"fas fa-book-open\"></i> Turned</a>",
+      "isChanged": false
+    },
+    {
+      "id": "unconscious",
+      "name": "Unconscious",
+      "icon": "modules/combat-utility-belt/icons/unconscious.svg",
+      "referenceId": "@Compendium[forge-vtt-shared-compendiums-my-dnd.journals.JlBjLgyuVXgq9fRi]{Unconscious}",
+      "applyTrigger": "9d1lb386s655v7br",
+      "removeTrigger": "9j4e0kfkttfrgiyz",
+      "activeEffect": {
+        "label": "Unconscious",
+        "icon": "icons/svg/unconscious.svg",
+        "tint": "",
+        "disabled": false,
+        "duration": {
+          "seconds": null,
+          "startTime": null,
+          "rounds": null,
+          "turns": null,
+          "startRound": null,
+          "startTurn": null
+        },
+        "changes": [
+          {
+            "key": "flags.midi-qol.grants.critical.mwak",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.grants.advantage.attack.all",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.str",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "flags.midi-qol.fail.ability.save.dex",
+            "mode": 2,
+            "value": 1
+          },
+          {
+            "key": "data.attributes.movement.walk",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.swim",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.fly",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.climb",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "data.attributes.movement.burrow",
+            "mode": 5,
+            "value": 0
+          },
+          {
+            "key": "macro.CUB",
+            "mode": 0,
+            "value": "Prone"
+          },
+          {
+            "key": "macro.CUB",
+            "mode": 0,
+            "value": "Incapacitated"
+          }
+        ],
+        "flags": {
+          "ActiveAuras": {
+            "isAura": false,
+            "ignoreSelf": false,
+            "hidden": false,
+            "height": false,
+            "alignment": "",
+            "type": "",
+            "aura": "None",
+            "radius": null,
+            "save": "",
+            "savedc": null,
+            "hostile": false,
+            "onlyOnce": false
+          },
+          "combat-utility-belt": {
+            "conditionId": "unconscious"
+          }
+        }
+      },
+      "options": {
+        "overlay": true,
+        "removeOthers": false,
+        "outputChat": true,
+        "markDefeated": false
+      },
+      "isNew": false,
+      "enrichedReference": "<a class=\"entity-link content-link\" draggable=\"true\" data-pack=\"forge-vtt-shared-compendiums-my-dnd.journals\" data-id=\"JlBjLgyuVXgq9fRi\"><i class=\"fas fa-book-open\"></i> Unconscious</a>",
+      "isChanged": false
+    }
+  ]
+}
