@@ -9,7 +9,7 @@ let gameRound = game.combat ? game.combat.round : 0;
 const diceMult = args[0].isCritical ? 2: 1;
 const numDice = 3 * diceMult;
 args[0].isCritical ? numDice * 2 : numDice;
-let damageRoll = new Roll(`${numDice}d6`).roll();
+await let damageRoll = new Roll(`${numDice}d6`).roll();
 new MidiQOL.DamageOnlyWorkflow(actorD, tokenD, damageRoll.total, "necrotic", [target], damageRoll, {flavor: "Necrotic Bite - Damage Roll (Necrotic)", damageList: args[0].damageList, itemCardId: args[0].itemCardId });
 await MidiQOL.applyTokenDamage([{damage: damageRoll.total, type: "healing"}], damageRoll.total, new Set([tokenD]), itemD.name, new Set());
 const effectData = {
