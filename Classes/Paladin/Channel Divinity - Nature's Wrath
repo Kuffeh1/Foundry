@@ -57,7 +57,7 @@ new Dialog({
          }],
           disabled: false,
         }
-        await target.createEmbeddedEntity("ActiveEffect", effectData);
+        await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
       }  
 
   };
@@ -91,7 +91,7 @@ new Dialog({
          }],
           disabled: false,
         }
-        await target.createEmbeddedEntity("ActiveEffect", effectData);
+        await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
       }  
 
   };
