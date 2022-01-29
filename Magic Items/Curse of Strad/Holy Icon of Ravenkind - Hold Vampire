@@ -37,7 +37,7 @@ async function main() {
                                   duration: {rounds: 10, startRound: gameRound, startTime: game.time.worldTime }
                      
                                          }
-              await currentTarget.createEmbeddedEntity("ActiveEffect", effectData);
+              await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
         }
          }
     }
