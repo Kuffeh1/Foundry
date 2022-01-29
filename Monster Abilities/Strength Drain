@@ -10,7 +10,7 @@ else tactor = game.actors.get(lastArg.actorId);
 let target  = Array.from(game.user.targets)[0].actor;
 
 // Roll the die
-let roll = new Roll('1d4').roll();
+await let roll = new Roll('1d4').roll();
 let rollvalue = roll.total
 let stat = target.data.data.abilities.str.value-rollvalue;
 game.dice3d?.showForRoll(roll);
@@ -36,7 +36,7 @@ let drain = async function() {
             }
         },
       }
-    await target.createEmbeddedEntity("ActiveEffect", effectData);
+    await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
  the_message = `<em>${tactor.name} saps ${target.name} of ${rollvalue} pts from their Strength Score! <br><br>${target.name} now has a Strength Score of ${stat}. <br><br><b>If it reaches O, they die!!</b></em>`;
   }
   ChatMessage.create({
