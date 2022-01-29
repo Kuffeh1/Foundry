@@ -50,7 +50,7 @@ async function main() {
                    }
                },
                     }
-              await currentTarget.createEmbeddedEntity("ActiveEffect", effectData);
+              await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
               await ChatMessage.create({content: `${currentTarget.name} is now Turned for 1 minute or until damaged!`});
               failed.push(target);
         }
