@@ -50,7 +50,7 @@ function dawn () {let Rdawn = async function() {
             }
         },
       }
-      await tactor.createEmbeddedEntity("ActiveEffect", effectData);
+      await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
     }
     await ChatMessage.create({speaker: spkr, content: `${tactor.name} has activated the:<br><br><b>Crimson Rite of the Dawn</b><br><br> They take damage equal to - `});
     await damageRoll.toMessage();
@@ -79,7 +79,7 @@ function flame () {let Rflame = async function() {
             }
         },
       }
-      await tactor.createEmbeddedEntity("ActiveEffect", effectData);
+      await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
     }
    await ChatMessage.create({speaker: spkr, content: `${tactor.name} has activated the:<br><br><b>Crimson Rite of the Flame</b><br><br> They take damage equal to - `});
       await damageRoll.toMessage();
