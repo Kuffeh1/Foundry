@@ -80,7 +80,7 @@ function activate () {let apply = async function() {
         },
         
       }
-      await target.createEmbeddedEntity("ActiveEffect", effectData);
+      await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
     }
    await ChatMessage.create({content: `${tactor.name} has amplified the curse, they injure themselves for <b>${damageRoll.total}</b> points of damage.`});
    await tactor.update({"data.attributes.hp.value" : HP - damageRoll.total });
@@ -98,7 +98,7 @@ function noactivate (){let noapply = async function() {
         "priority": 20
        },],
             }
-      await target.createEmbeddedEntity("ActiveEffect", effectData);
+     await target.createEmbeddedDocuments("ActiveEffect", [effectData]);
     }
 };
 noapply();
