@@ -1,0 +1,99 @@
+/*
+Modules Used - MidiQOL, ItemMacro, Warpgate
+
+Set Up - You need to ensure you have an actor with the matching name of Bear/Hawk/Unicorn Totem.  
+Bear and Unicorn need to have a feature set up as per the ability, with the damage line left blank
+
+Macro is called using the Item Macro feature with MidiQOL -  ItemMacro - before active effect
+*/
+
+const actorD = game.actors.get(args[0].actor._id);
+const tokenD = canvas.tokens.get(args[0].tokenId);
+const level = args[0].spellLevel;
+const druid = actorD.data.data.classes.druid.levels;
+const summonerMod = getProperty(tokenD.actor, `data.data.abilities.${getProperty(tokenD.actor, 'data.data.attributes.spellcasting')}.mod`);
+
+let choices = await warpgate.dialog([
+
+    {
+        type:'header', 
+        label:`Type`
+    },
+    {
+        type: 'radio', 
+        label: `Bear`, 
+    },
+    {
+        type: 'radio', 
+        label: `Hawk`, 
+    },
+    {
+        type: 'radio', 
+        label: `Unicorn`, 
+    },
+    ],
+    "⚔️ Choose your spirit:",
+    "Call Forth!")
+
+let spiritArray = [choices[1],choices[2],choices[3]];  
+spiritArray = spiritArray.filter(Boolean);
+let summon = spiritArray[0];
+
+let summonType = `${summon} Totem`;
+   
+let updates = 
+    {
+    embedded: { 
+            Item: {
+            "type": "action",
+            "Unicorn Totem - Use" :{
+            'data.damage.parts': [[`${druid}`, 'healing']]
+        },
+        }
+    },
+    embedded: { 
+        Item: {
+        "type": "action",    
+        "Bear Totem - Use" :{
+        'data.damage.parts': [[`5*${druid}`, 'temphp']]
+    },
+    }
+},
+    }
+
+    async function myEffectFunction(template) {
+
+//prep summoning area
+        new Sequence()
+            .effect()
+                .file('modules/JB2A_DnD5e/Library/Generic/Energy/EnergyStrandIN01_02_Regular_Green_600x600.webm')
+                .atLocation(template)
+                .center()
+                .scale(1.5)
+                //.belowTokens()
+            .play()
+        }
+        
+        async function postEffects(template, token) {
+        //bring in our token
+        new Sequence()
+            .animation()
+                .on(token)
+                    .fadeIn(1500)
+            .play()
+        }
+        
+        const callbacks = {
+            pre: async (template,update) => {
+                myEffectFunction(template);
+                await warpgate.wait(500);
+            },
+            post: async (template, token) => {
+            postEffects(template,token);
+            await warpgate.wait(500);
+            }
+        };
+  
+  const options = {controllingActor: actor};
+
+  warpgate.spawn(summonType, updates, callbacks, options);
