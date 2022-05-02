@@ -4,7 +4,7 @@ Modules Used - MidiQOL, ItemMacro, Warpgate
 Set Up - You need to ensure you have an actor with the matching name of Bear/Hawk/Unicorn Totem.  
 Bear and Unicorn need to have a feature set up as per the ability, with the damage line left blank
 
-Macro is called using the Item Macro feature with MidiQOL -  ItemMacro - before active effect
+OnUse -  ItemMacro - before active effect
 */
 
 const actorD = game.actors.get(args[0].actor._id);
