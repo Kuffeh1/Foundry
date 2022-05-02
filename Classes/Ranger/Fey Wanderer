@@ -1,0 +1,19 @@
+/*
+Module Used - MidiQOL, Dynamic Active Effect, ItemMacro
+Set up - Weapons has an active effect called "Dreadful Strike" - no effect - duration set to expire in 1 turn
+
+Using MidiQOL - Onuse -ItemMacro
+
+*/
+
+
+let target = await fromUuid(args[0].hitTargetUuids[0] ?? "");
+const damageRoll = await (new Roll(args[0].isCritical ? "1d4 + 4" : "1d4").roll({async:true}));
+
+if (target.actor.effects.find(i=> i.data.label === "Dreadful Strike"))
+{
+}
+else
+{
+  await new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "psychic", target ? [target] : [], damageRoll, {flavor: "Psychic", itemCardId: args[0].itemCardId});
+}
