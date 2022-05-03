@@ -1,0 +1,72 @@
+
+/*
+Modules Used - MidiQOL, ItemMacro, Warpgate
+
+Set Up - You need to ensure you have an actor with the matching name of Healinf Spirit.  
+It will need to have a feature set up as per the ability, with the damage line left blank; [range: 2ft/radius/allies action: healing, Damage Formula: blank/Healing]
+
+Macro is called using the Item Macro feature with MidiQOL -  ItemMacro - before active effect
+*/
+
+const actorD = game.actors.get(args[0].actor._id);
+const tokenD = canvas.tokens.get(args[0].tokenId);
+const level = args[0].spellLevel;
+const summonerMod = getProperty(tokenD.actor, `data.data.abilities.${getProperty(tokenD.actor, 'data.data.attributes.spellcasting')}.mod`);
+
+let summonType = `Healing Spirit`;
+let healDie = level-1;
+let numUse = 1+summonerMod;
+
+let updates = 
+    {
+             embedded: { 
+                 Item: {
+                    //"type": "action",
+                    "Healing Spirit" :{
+                        'data.uses.value': `${numUse}`,
+                        'data.uses.max': `${numUse}`,
+                        'data.damage.parts': [[`${healDie}d6`, 'healing']]
+                    },
+                  
+                
+                }
+            }
+}
+    async function myEffectFunction(template) {
+
+    
+        //prep summoning area
+        new Sequence()
+            .effect()
+                .file('modules/JB2A_DnD5e/Library/Generic/Energy/EnergyStrandIN01_02_Regular_Green_600x600.webm')
+                .atLocation(template)
+                .center()
+                .scale(1.5)
+                //.belowTokens()
+            .play()
+        }
+        
+        async function postEffects(template, token) {
+        //bring in our token
+        new Sequence()
+            .animation()
+                .on(token)
+                    .fadeIn(1500)
+        
+            .play()
+        }
+        
+        const callbacks = {
+            pre: async (template,update) => {
+                myEffectFunction(template);
+                await warpgate.wait(500);
+            },
+            post: async (template, token) => {
+            postEffects(template,token);
+            await warpgate.wait(500);
+            }
+        };
+  
+  const options = {controllingActor: actorD};
+
+  warpgate.spawn(summonType, updates, callbacks, options);
