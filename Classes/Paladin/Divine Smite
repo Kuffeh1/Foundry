@@ -1,0 +1,107 @@
+
+/*
+This is an ItemMacro that will be needed to bee applied to all melee weapons the Paladin can use.
+
+Modules needed - Item Macro, MidiQOL
+
+OneUse - ItemMacro ; after damage roll
+
+*/ 
+
+let target = await fromUuid(args[0].hitTargetUuids[0] ?? "");
+const lastArg = args[args.length - 1];
+let palActor;
+if (lastArg.tokenId) palActor = canvas.tokens.get(lastArg.tokenId).actor;
+else palActor = game.actors.get(lastArg.actorId);
+
+let slots1 = palActor.data.data.spells.spell1.value;
+let slots2 = palActor.data.data.spells.spell2.value;
+let slots3 = palActor.data.data.spells.spell3.value;
+let slots4 = palActor.data.data.spells.spell4.value;
+let slots5 = palActor.data.data.spells.spell5.value;
+
+Hooks.once("midi-qol.preDamageRollComplete", (workflow) => {return false})
+ 
+new Dialog({
+  title: "Do you want to Divine Smite?",
+  content: `
+  <br>
+  Level One     - ${slots1} Slots Available <br>
+  Level Two     - ${slots2} Slots Available <br>
+  Level Three   - ${slots3} Slots Available <br>
+  Level Four    - ${slots4} Slots Available <br>
+  Level Five    - ${slots5} Slots Available <br>
+  <br>
+   `,
+  buttons:{
+    one: {
+        label: "Yes",
+        callback: () => Yes()
+    },
+    two: {
+      label: "No",
+      callback: () => No()
+  }
+  }
+}).render(true);
+
+function Yes (){let Pos = async function() {
+let dialog = new Dialog({
+    content: `
+    <form class="smiteLevel">
+    <div class="form-group"><label class="radio-label"><input type="radio" name="smite" value="1">   Level One   </label></div>
+    <div class="form-group"><label class="radio-label"><input type="radio" name="smite" value="2">   Level Two   </label></div>
+    <div class="form-group"><label class="radio-label"><input type="radio" name="smite" value="3">   Level Three </label></div>
+    <div class="form-group"><label class="radio-label"><input type="radio" name="smite" value="4">   Level Four  </label></div>
+    <div class="form-group"><label class="radio-label"><input type="radio" name="smite" value="5">   Level Five  </label></div>
+    </form>
+    `,
+    default: 'done',
+    buttons: {
+      done: {
+        icon: '<i class="fas fa-hand-sparkles"></i>',
+        label: 'Done',
+        default: true,
+        callback: async (html) => {
+          let smite = $("input[type='radio'][name='smite']:checked").val();
+          let smiteLvl = parseInt(smite);
+          
+          let undead = ["undead"].some(type => (target?.actor.data.data.details.type?.value || "").toLowerCase().includes(type));
+          let damDie = 1 + smiteLvl;
+          if (undead) damDie += 1;
+          let damCrit = damDie * 8;
+          
+          const damageRoll = await (new Roll(args[0].isCritical ? `${damDie}d8 + ${damCrit}` : `${damDie}d8`).roll({async:true}));
+
+          await new MidiQOL.DamageOnlyWorkflow(actor, token, damageRoll.total, "radiant", target ? [target] : [], damageRoll, {flavor: "Divine Smite (Radiant)", itemCardId: args[0].itemCardId});
+
+          if (smiteLvl == 1) {
+          await palActor.update({"data.spells.spell1.value"   : slots1 - 1 });
+          }
+          else
+          if (smiteLvl == 2) {
+          await palActor.update({"data.spells.spell2.value"   : slots2 - 1 });
+            }
+          if (smiteLvl == 3) {
+          await palActor.update({"data.spells.spell3.value"   : slots3 - 1 });
+              }
+          else
+          if (smiteLvl == 4) {
+          await palActor.update({"data.spells.spell4.value"   : slots4 - 1 });
+              }  
+          else
+          if (smiteLvl == 5) {
+          await palActor.update({"data.spells.spell5.value"   : slots5 - 1 });
+              }      
+      }
+    }
+}
+  }).render(true);
+};
+Pos();
+}
+
+function No (){let Neg = async function() {
+};
+Neg();
+}
