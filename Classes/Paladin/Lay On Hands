@@ -1,0 +1,119 @@
+
+
+/*
+This macro runs as an Item Macro, to update the Lay on Hands feature
+
+Modules - ItemMacro, MidiQOL, Warpgate
+
+Set up - Feature called Lay on Hands, target: 1 creature/touch - Heealing - Haling forumula: BLANK, healing
+
+OnUse: ItemMacro - Before damage roll
+*/ 
+
+let select = canvas.tokens.controlled;
+let palActor = select[0].actor;
+
+let targets = Array.from(game.user.targets)
+let healedTarget = targets[0].actor;
+
+let currentHP = healedTarget.data.data.attributes.hp.max - healedTarget.data.data.attributes.hp.value;
+let healedActor = healedTarget.name;
+let healedHP = healedTarget.data.data.attributes.hp.value;
+let laypointsAvail = palActor.data.data.resources.primary.value;
+
+new Dialog({
+    title: "Do you want to Heal or Cleanse?",
+  buttons:{
+    one: {
+        label: "Heal",
+        callback: () => heal()
+    },
+    two: {
+      label: "Cleanse",
+      callback: () => Cleanse()
+    }
+    }
+  }).render(true);
+  
+  function heal (){let Heal = async function() {
+    let dialog = new Dialog({
+    content: `
+   <br>
+   You have [${laypointsAvail}] points available to use to heal your ally.
+   <br><br>
+    ${healedActor} can receive up to up to ${currentHP} points of healing.
+    <br><br>
+    <form class="flexcol">
+      <div class="form-group">
+        <label for="laypointsUsed">How many points do you wish to use?</label></div>
+        <div><input type="number" name="laypointsUsed" placeholder="Enter Value"></div>
+      </form>
+    `,
+    default: 'done',
+    buttons: {
+      done: {
+        icon: '<i class="fas fa-hand-sparkles"></i>',
+        label: 'Done',
+        default: true,
+        callback: async (html) => {
+            let input = html.find('[name="laypointsUsed"]').val();
+            let healedAmount = parseInt(input);
+
+            let updates = 
+            {
+             embedded: { 
+                 Item: {
+                    //"type": "action",
+                    "Lay on Hands" :{
+                    'data.damage.parts': [[`${input}`, 'healing']]
+                    },
+                  
+                
+                }
+            }
+            }
+            await warpgate.mutate(token.document, updates);
+
+            //await ChatMessage.create({content: `${palActor.name} lays their hands on <b>${healedActor}</b>.<br><br> They receive <b>${healedAmount} points</b> of healing`});
+            //await healedTarget.update({"data.attributes.hp.value"   : healedHP + healedAmount });
+            await palActor.update({"data.resources.primary.value"   : laypointsAvail - healedAmount });
+      }
+    }
+}
+  }).render(true);
+};
+Heal();
+}
+
+function Cleanse (){let Cleanse = async function() {
+    let dialog = new Dialog({
+        content: `
+       <br>
+       ${healedActor} can be cleansed of one Poison or Disease for 5 points of healing.
+       <br>
+       <form class="flexcol">
+       <div class="form-group">
+         <label for="laypointsUsed">How many effect do you wish to remove?</label></div>
+         <div><input type="text" name="laypointsUsed" placeholder="Enter Value"></div>
+       </form>
+        `,
+        default: 'done',
+        buttons: {
+          done: {
+            icon: '<i class="fas fa-hand-sparkles"></i>',
+            label: 'Done',
+            default: true,
+            callback: async (html) => {
+                let input = html.find('[name="laypointsUsed"]').val();
+                let healedAmount = parseInt(input)*5;
+                
+                await ChatMessage.create({content: `${palActor.name} cleanses ${healedActor} of ${input} poisons and diseases`});
+                await palActor.update({"data.resources.primary.value"   : laypointsAvail - healedAmount });
+          }
+        }
+    }
+      }).render(true);
+
+};
+Cleanse();
+}
