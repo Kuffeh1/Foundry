@@ -1,0 +1,70 @@
+
+
+/*
+Modules needed: MidiQOL, Warpgate, Item Macro
+
+Spell has an empty active effect (to track concentration)
+
+OnUse - ItemMacro - Before active effects
+
+***  KNOWN ISSUE: ITEM DOES NOT REVERT AFTER EFFECT ENDS; YOU WILL NEED TO MANUALLY REVERT IT ***
+ */
+
+if (args[0].tag === "OnUse") {
+  const targetToken = await MidiQOL.MQFromUuid(args[0].tokenUuid);
+  const targetActor = await MidiQOL.MQfromActorUuid(args[0].actorUuid);
+
+  function value_limit(val, min, max) {
+    return val < min ? min : (val > max ? max : val);
+  };
+  let spellLevel = Math.floor(args[0].spellLevel / 2);
+  let bonus = value_limit(spellLevel, 1, 3);
+
+  let weaponDocs = targetActor.data.items.filter(i => i.data.type === "weapon").sort((a, b) => a.data.name < b.data.name ? -1 : 1);
+  function populateList(documents) {
+      return documents.reduce((list, doc) => list += `<div class="form-group"><label>${doc.data.name}</label><div class="form-fields"><input type="radio"     name="weapon" value=${doc.id}></div></div>\n`, ``);
+}
+
+  let weaponList = populateList(weaponDocs);
+
+  let dialog = new Dialog({
+    title: args[0].item.name,
+    content: `<form>
+              ${weaponList}
+              </form>`,
+    default: 'done',
+    buttons: {
+      done: {
+        icon: '<i class="fas fa-hand-sparkles"></i>',
+        label: 'Done',
+        default: true,
+        callback: async (html) => {
+          let weaponId = $("input[type='radio'][name='weapon']:checked").val();
+          let weapon = targetActor.items.get(weaponId);
+          let attackBonus = Number(weapon.data.data.attackBonus) + bonus;
+
+          const mutationData = {
+            token: {},
+            actor: {},
+            embedded: {
+              Item: {
+                [weapon.name]: {
+                  "data.properties.mgc": true,
+                  "data.attackBonus": attackBonus,
+                  "data.damage.parts": [[`${weapon.data.data.damage.parts[0][0]} + ${bonus}`]]
+                }
+              }
+            }
+          };
+          await warpgate.mutate(targetToken, mutationData, {}, {name: "Magic Weapon"});
+        }
+      }
+    }
+  }).render(true);
+}
+
+if (args[0] === "off") { 
+  const lastArg = args[args.length-1];
+  const targetToken = await DAE.DAEfromUuid(lastArg.tokenUuid);
+  await warpgate.revert(targetToken, "Magic Weapon");
+}
