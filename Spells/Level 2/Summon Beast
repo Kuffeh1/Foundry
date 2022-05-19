@@ -1,0 +1,145 @@
+/*
+Modules Used - MidiQOL, ItemMacro, Warpgate, JB2A (Free or Patreon), Sequencer [for the effects, optional]
+
+Set Up - You need to ensure you have an actor called 'Bestial Spirit'
+
+MidiQOL OnUse -  ItemMacro - before active effect
+*/
+
+const casterToken = game.actors.get(args[0].actor._id);
+const tokenD = canvas.tokens.get(args[0].tokenId);
+const spelllevel = args[0].spellLevel;
+const level = casterToken.data.data.details.level;
+
+let choices = await warpgate.dialog([
+
+    {
+        type:'header', 
+        label:`Type`
+    },
+    {
+        type: 'radio', 
+        label: `Air`, 
+    },
+    {
+        type: 'radio', 
+        label: `Land`, 
+    },
+    {
+        type: 'radio', 
+        label: `Water`, 
+    },
+    ],
+    "⚔️ Choose your spirit:",
+    "Call Forth!")
+
+let spiritArray = [choices[1],choices[2],choices[3]];  
+spiritArray = spiritArray.filter(Boolean);
+let summon = spiritArray[0];
+
+const summonType = `Bestial Spirit`;
+
+let baseHP = '';
+        
+        if (summon === 'Air')
+            { baseHP = 20; }
+        if (summon === 'Land')
+            { baseHP = 30; }
+        if (summon === 'Water')  
+            { baseHP = 30; }  
+        
+let upcastHP = ' ';
+        if (spelllevel >= 3)
+            { upcastHP = `${((spelllevel-2)*5)}`; }
+        
+let beastHP = ' ';
+         if (spelllevel < 3)
+                {beastHP = parseInt(baseHP)}  
+         if (spelllevel >= 3)
+                { beastHP =  parseInt(baseHP) + parseInt(upcastHP); } 
+
+let beastImg = '';
+        
+        if (summon === 'Air')
+            { beastImg = 'https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/tokens/NPCs/Summons/Beast%20Spirit/air_spirit.Token.webp'; }
+        if (summon === 'Land')
+            { beastImg = 'https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/tokens/NPCs/Summons/Beast%20Spirit/land_spirit.Token.webp'; }
+        if (summon === 'Water')  
+            { beastImg = 'https://assets.forge-vtt.com/60d61d34d28f090bc36517c0/Images/tokens/NPCs/Summons/Beast%20Spirit/water_spirit.Token.webp'; }    
+            
+let beastMove = '';
+
+        if (summon === 'Air')
+            { beastMove = {fly: 60}; }
+        if (summon === 'Land')
+            { beastMove = {climb: 30}; }
+        if (summon === 'Water')  
+            { beastMove = {swim: 30}; }              
+
+let updates = 
+    {
+    token: {
+      'img': beastImg ,
+            },
+    actor: {
+      'name':`${summon} of ${casterToken.name}`,
+      'data.attributes.ac.flat' : 11+spelllevel,
+      'data.attributes.hp' : {value: beastHP, max: beastHP},
+      'data.details.cr' : level ,
+      'data.attributes.movement' : beastMove,
+            },  
+    embedded: {  
+      Item: {
+        "Multi-Attack":{
+          'name': `Multi-Attack (${Math.floor(spelllevel/2)} attacks)`},
+        "Maul":{
+          'data.damage.parts': [[`1d8  + @mod + ${spelllevel}`, 'slashing']]},
+            }
+              },
+    }
+
+    async function myEffectFunction(template) {
+
+let effect = ' ';
+            if (summon === 'Air')
+                { effect = 'modules/JB2A_DnD5e/Library/Generic/Impact/PartSideImpactSmoke02_01_Regular_Blue_600x600.webm'; }
+            if (summon === 'Land')
+                { effect = 'modules/JB2A_DnD5e/Library/Generic/Impact/GroundCrackImpact_01_Regular_Orange_600x600.webm'; } 
+            if (summon === 'Water')
+                { effect = 'modules/JB2A_DnD5e/Library/Generic/Liquid/LiquidSplash01_Regular_Blue_400x400.webm'; }
+ 
+//prep summoning area
+        new Sequence()
+            .effect()
+                .file(effect)
+                .atLocation(template)
+                .center()
+                .scale(0.3)
+                //.belowTokens()
+            .play()
+        }
+        
+        async function postEffects(template, token) {
+        //bring in our token
+        new Sequence()
+            .animation()
+                .on(token)
+                    .fadeIn(1500)
+            .play()
+        }
+        
+        const callbacks = {
+            pre: async (template,update) => {
+                myEffectFunction(template);
+                await warpgate.wait(500);
+            },
+            post: async (template, token) => {
+            postEffects(template,token);
+            await warpgate.wait(500);
+            }
+        };
+  
+  const options = {controllingActor: actor};
+
+  await warpgate.spawn(summonType, updates, callbacks, options);
+    
