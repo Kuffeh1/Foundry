@@ -25,7 +25,7 @@ for (let tokenUuid of args[0].hitTargetUuids) {
         icon: "icons/skills/melee/strike-sword-steel-yellow.webp",
         label: "Searing Smite"
       }
-      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+      await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: targetActor.uuid, effects: [effectData] });
       await ChatMessage.create({content: `${target.name} is set on fire and begins to burn!`});
 } 
 Hooks.once("midi-qol.RollComplete", (workflow) => {
