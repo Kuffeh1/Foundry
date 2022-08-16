@@ -22,7 +22,7 @@ for (let tokenUuid of args[0].hitTargetUuids) {
                 ],
       }
 
-      await targetActor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+      await MidiQOL.socket().executeAsGM("createEffects", { actorUuid: targetActor.uuid, effects: [effectData] });
       await ChatMessage.create({content: `${target.name} is pushed 10 feet away from ${selected.name} and knocked from their feet!`});
 } 
 }
