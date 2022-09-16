@@ -1,0 +1,91 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+
+
+console.log("Actor: ", actor);
+let charges = tactor.items.find(item => item.data.name == "Pearl of Power");
+
+let actr = game.actors.getName('');
+let spkr = ChatMessage.getSpeaker({ actr });
+
+let slotsUsed1 = tactor.data.data.spells.spell1.max - tactor.data.data.spells.spell1.value;
+let slotsUsed2 = tactor.data.data.spells.spell2.max - tactor.data.data.spells.spell2.value;
+let slotsUsed3 = tactor.data.data.spells.spell3.max - tactor.data.data.spells.spell3.value;
+
+let slots1 = tactor.data.data.spells.spell1.value;
+let slots2 = tactor.data.data.spells.spell2.value;
+let slots3 = tactor.data.data.spells.spell3.value;
+
+new Dialog({
+    content: `
+    <br>
+    You can now regain a single spent spell slot, you have used:
+    <br>
+    <br>
+    - ${slotsUsed1} first level spells
+    <br>
+    - ${slotsUsed2} second level spells
+    <br>
+    - ${slotsUsed3} third level spells
+    <br>
+    <br>
+    Please select below which slot to recover:
+    <br>
+    <br>
+     `,
+    buttons:{
+      one: {
+          label: "Level One",
+          callback: () => first()
+      },
+      two: {
+        label: "Level Two",
+        callback: () => second()
+    },
+    three: {
+      label: "Level Three",
+      callback: () => third()
+    }
+    }
+  }).render(true);
+  
+  function first () {let fLevel = async function() {
+        if (slots1 +1 > tactor.data.data.spells.spell1.max){
+          ui.notifications.warn('You already have the maximum spells available for this level');
+          }
+          else {
+    
+    await tactor.update({"data.spells.spell1.value"   : slots1 + 1 });
+    await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered one spell slot of <b><u>First Level</u></b>.<br><br>The Pearl is now dormant unil the next dawn. `});}
+    await charges.update({"data.uses.value": charges.data.data.uses.value - 1});
+      };
+      fLevel();
+      }
+
+  function second () {let sLevel = async function() {
+    if (slots2 +1 > tactor.data.data.spells.spell2.max){
+      ui.notifications.warn('You already have the maximum spells available for this level');
+      }
+      else {
+    await tactor.update({"data.spells.spell2.value"   : slots2 + 1 });
+    await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered one spell slot of <b><u>Second Level</u></b>.<br><br>The Pearl is now dormant unil the next dawn. `});
+    await charges.update({"data.uses.value": charges.data.data.uses.value - 1});
+      }
+      };
+      sLevel();
+      }
+
+  function third () {let tLevel = async function() {
+    if (slots3 +1 > tactor.data.data.spells.spell3.max){
+      ui.notifications.warn('You already have the maximum spells available for this level');
+      }
+      else {
+    await tactor.update({"data.spells.spell3.value"   : slots3 + 1 });
+    await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered one spell slot of <b><u>Third Level</u></b>.<br><br>The Pearl is now dormant unil the next dawn. `});
+    await charges.update({"data.uses.value": charges.data.data.uses.value - 1});
+      }
+      };
+      tLevel();
+      }
