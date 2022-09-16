@@ -1,0 +1,138 @@
+const lastArg = args[args.length - 1];
+let tactor;
+if (lastArg.tokenId) tactor = canvas.tokens.get(lastArg.tokenId).actor;
+else tactor = game.actors.get(lastArg.actorId);
+
+
+console.log("Actor: ", actor);
+let charges = tactor.items.find(item => item.data.name == "Potion of Restoration");
+
+  let actr = game.actors.getName('');
+  let spkr = ChatMessage.getSpeaker({ actr });
+
+  let first = 'primary';
+  let second = `secondary`;
+  let third = 'tertiary';
+  let fourth = 'fourth';
+
+  let firstLabel =  tactor.data.data.resources[first].label;
+  let secondLabel =  tactor.data.data.resources[second].label;
+  let thirdLabel =  tactor.data.data.resources[third].label;
+  let fourthLabel =  tactor.data.data.resources[fourth].label;
+
+  let firstValue =  tactor.data.data.resources[first].value || 0;
+  let secondValue =  tactor.data.data.resources[second].value || 0;
+  let thirdValue =  tactor.data.data.resources[third].value || 0;
+  let fourthValue =  tactor.data.data.resources[fourth].value || 0;
+
+  let firstMax =  tactor.data.data.resources[first].max;
+  let secondMax =  tactor.data.data.resources[second].max;
+  let thirdMax =  tactor.data.data.resources[third].max;
+  let fourthMax =  tactor.data.data.resources[fourth].max;
+
+  new Dialog({
+    content: `
+    <br>
+    You have the remaining charges left, please select a resource to replenish at the botttom:
+    <br>
+    <br>
+    - ${firstLabel} - ${firstValue}/${firstMax} charges remain
+    <br>
+    - ${secondLabel} - ${secondValue}/${secondMax} charges remain
+    <br>
+    - ${thirdLabel} - ${thirdValue}/${thirdMax} charges remain
+    <br>
+    - ${fourthLabel} - ${fourthValue}/${fourthMax} charges remain
+    <br>
+    <br>
+    Please select below which slot to recover:
+    <br>
+    <br>
+     `,
+    buttons:{
+      one: {
+          label: `${firstLabel}`,
+          callback: () => firstButton()
+      },
+      two: {
+        label: `${secondLabel}`,
+        callback: () => secondButton()
+    },
+    three: {
+      label: `${thirdLabel}`,
+      callback: () => thirdButton()
+    },
+    four: {
+      label: `${fourthLabel}`,
+      callback: () => fourthButton()  
+    }
+    }
+  }).render(true);
+
+  function firstButton () {let fResource = async function() {
+    if (firstValue == firstMax){
+      ui.notifications.warn('You already have the maximum number of charge available for this feature');
+      }
+      else {
+
+await tactor.update({"data.resources.primary.value"   : firstMax });
+await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered the maximum number of charges for ${firstLabel} `});}
+await charges.update({"data.quantity": charges.data.data.quantity - 1});
+    if(charges.data.data.quantity < 1){
+      charges.delete();
+    }
+
+  };
+  fResource();
+  }
+
+  function secondButton () {let sResource = async function() {
+    if (secondValue == secondMax){
+      ui.notifications.warn('You already have the maximum number of charge available for this feature');
+      }
+      else {
+
+await tactor.update({"data.resources.secondary.value"   : secondMax });
+await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered the maximum number of charges for ${secondLabel} `});}
+await charges.update({"data.quantity": charges.data.data.quantity - 1});
+    if(charges.data.data.quantity < 1){
+      charges.delete();
+    }
+
+  };
+  sResource();
+  }
+
+  function thirdButton () {let tResource = async function() {
+    if (thirdValue == thirdMax){
+      ui.notifications.warn('You already have the maximum number of charge available for this feature');
+      }
+      else {
+
+await tactor.update({"data.resources.tertiary.value"   : thirdMax });
+await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered the maximum number of charges for ${thirdLabel} `});}
+await charges.update({"data.quantity": charges.data.data.quantity - 1});
+    if(charges.data.data.quantity < 1){
+      charges.delete();
+    }
+
+  };
+  tResource();
+  }
+
+  function fourthButton () {let fResource = async function() {
+    if (fourthValue == fourthMax){
+      ui.notifications.warn('You already have the maximum number of charge available for this feature');
+      }
+      else {
+
+await tactor.update({"data.resources.fourth.value"   : fourthMax });
+await ChatMessage.create({speaker: spkr, content: `<br>${tactor.name} has recovered the maximum number of charges for ${fourthLabel} `});}
+await charges.update({"data.quantity": charges.data.data.quantity - 1});
+    if(charges.data.data.quantity < 1){
+      charges.delete();
+    }
+
+  };
+  fResource();
+  } 
